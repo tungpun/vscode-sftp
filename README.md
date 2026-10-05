@@ -1,23 +1,24 @@
-# sftp sync extension for VS Code
+# sftp sync extension for VS Code (tungpun fork)
 
-New maintained and updated version by [@Natizyskunk](https://github.com/Natizyskunk/) 😀 <!-- and [@satiromarra](https://github.com/satiromarra) --> <br>
-(Forked from the no longer maintained [liximomo's SFTP plugin](https://github.com/liximomo/vscode-sftp.git))
+Fork maintained by [@tungpun](https://github.com/tungpun) of [@Natizyskunk's SFTP extension](https://github.com/Natizyskunk/vscode-sftp) 😀 <br>
+(Itself forked from the no longer maintained [liximomo's SFTP plugin](https://github.com/liximomo/vscode-sftp.git))
 
-- VS Code marketplace : https://marketplace.visualstudio.com/items?itemName=Natizyskunk.sftp <br>
-- VSIX release : https://github.com/Natizyskunk/vscode-sftp/releases/
+- VSIX release : https://github.com/tungpun/vscode-sftp/releases/
+- Issues : https://github.com/tungpun/vscode-sftp/issues
+- Upstream : https://github.com/Natizyskunk/vscode-sftp
 
-✳ I would be more than happy to have you participate in one way or another to this project. You can do so by simply following the [templates](https://github.com/Natizyskunk/vscode-sftp/issues/new/choose) when you open a new issue or a new pull request.
+## About this fork
+Upstream's latest release ([v1.16.3](https://github.com/Natizyskunk/vscode-sftp/releases/tag/v1.16.3)) is no longer updated and fails on recent VS Code versions (Node 23+) with `TypeError: isDate is not a function` on file transfers. This fork fixes that and is built and released from https://github.com/tungpun/vscode-sftp.
 
-## ℹ INFOS - 2025/03/13
-I've tried to keep this extension up-to-date as much as I can and added a lot of new relevant features. Saddly, for the last year and a half I wasn't really able to work on the project because of personal reasons and I'm really not sure if and when I'll be able to get more time to work on it again. So for now consider the [v1.16.3](https://github.com/Natizyskunk/vscode-sftp/releases/tag/v1.16.3) as the latest official stable release available.
+To tell it apart from the upstream extension, this fork is published as:
 
-## ℹ INFOS - 2023/06/23
-This is the main repository for the SFTP extension since [@liximomo](https://github.com/liximomo) has set his own to deprecated in favor of this one in the VSCode marketplace.
-There are also other forks that are available. Feel free to try them.
+| | Upstream | This fork |
+|---|---|---|
+| Extension ID | `Natizyskunk.sftp` | `tungpun.sftp` |
+| Display name | `SFTP` | `SFTP (tungpun fork)` |
+| Status bar tooltip | `SFTP@Natizyskunk` | `SFTP@tungpun` |
 
-A lot of work as been brought to fix bugs, add new features and more than 50 updates have been released with a lot of improvements and stability fixes for almost two years now. 😎
-
-I've been working hard to fix a lot of things and I've updated more than 50 new releases with a lot of improvements and stability fixes and I've brought new features for almost three years now. 
+Your `.vscode/sftp.json` files, `sftp.*` settings and `SFTP:` commands are unchanged, so no configuration change is needed when switching. See the [CHANGELOG](./CHANGELOG.md) for what changed.
 
 ---
 
@@ -38,21 +39,32 @@ VSCode-SFTP enables you to add, edit or delete files within a local directory an
 - [FAQ](#FAQ)
 
 ## Installation
+This fork is not on the VS Code Marketplace. Install it from a VSIX file:
 
-### Method 1 (Recommended : Auto update)
-1. Select Extensions (Ctrl + Shift + X).
-2. Uninstall current sftp extension from @liximomo.
-3. Install new extension directly from VS Code Marketplace : https://marketplace.visualstudio.com/items?itemName=Natizyskunk.sftp.
-4. Voilà!
+1. Download the latest `sftp-<version>.vsix` from the [releases page](https://github.com/tungpun/vscode-sftp/releases/).
+2. Select Extensions (Ctrl + Shift + X).
+3. Uninstall any other SFTP extension (`Natizyskunk.sftp` or `liximomo.sftp`). They register the same commands and conflict with this one.
+4. Open the "More Actions" menu (ellipsis at the top) and click "Install from VSIX…", or run `code --install-extension sftp-<version>.vsix`.
+5. Reload VS Code.
+6. Check the extension shows as **SFTP (tungpun fork)** with ID `tungpun.sftp`.
 
-### Method 2 (Manual update)
-To install just follow these steps from within VSCode:
-1. Select Extensions (Ctrl + Shift + X).
-2. Uninstall current sftp extension from @liximomo.
-3. Open "More Action" menu(ellipsis on the top) and click "Install from VSIX…".
-4. Locate VSIX file and select.
-5. Reload VSCode.
-6. Voilà!
+Updates are not automatic. Repeat these steps with a newer VSIX to update.
+
+### Building from source
+```sh
+npm ci --ignore-scripts --omit=optional
+npx @vscode/vsce package
+```
+This produces `sftp-<version>.vsix` in the repo root. The `.vsix` is platform-independent: `ssh2`'s optional native crypto add-ons are skipped and it falls back to its pure-JS implementation.
+
+### Releasing
+The [Release workflow](./.github/workflows/release.yml) builds the `.vsix` on every push and pull request (downloadable from the workflow run). To publish a release:
+
+1. Bump `version` in `package.json` (`npm version <x.y.z> --no-git-tag-version`) and add a `CHANGELOG.md` entry.
+2. Commit and push.
+3. Tag and push: `git tag v<x.y.z> && git push origin v<x.y.z>`.
+
+The workflow checks the tag matches `package.json` and creates a GitHub release with the `.vsix` attached.
 
 ## Documentation
 - [Home](https://github.com/Natizyskunk/vscode-sftp/wiki)
@@ -100,10 +112,11 @@ For detailed explanations please go to [wiki](https://github.com/Natizyskunk/vsc
 ## Example configurations
 You can see the full list of configuration options [here](https://github.com/Natizyskunk/vscode-sftp/wiki/configuration).
 
-- [sftp sync extension for VS Code](#sftp-sync-extension-for-vs-code)
+- [sftp sync extension for VS Code (tungpun fork)](#sftp-sync-extension-for-vs-code-tungpun-fork)
+  - [About this fork](#about-this-fork)
   - [Installation](#installation)
-    - [Method 1 (Recommended : Auto update)](#method-1-recommended--auto-update)
-    - [Method 2 (Manual update)](#method-2-manual-update)
+    - [Building from source](#building-from-source)
+    - [Releasing](#releasing)
   - [Documentation](#documentation)
   - [Usage](#usage)
   - [Example configurations](#example-configurations)
