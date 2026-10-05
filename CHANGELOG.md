@@ -1,3 +1,7 @@
+## 1.16.5 - 2026-10-05
+* Fix : `TypeError: The "listener" argument must be of type function` on every SSH connect. The `close`/`end` handlers (from unreleased upstream commit d54ce20) called `this.end()` instead of passing a function.
+* Fix : `end()` no longer reverses the hop clients list in place, so repeated calls keep the "last connected, first ended" order.
+
 ## 1.16.4 - 2026-10-05
 * Fix : `TypeError: isDate is not a function` on transfers with newer VS Code (Node 23+). Upgrade `ssh2` version to v1.17.0, which no longer uses the removed `util.isDate`.
 * Fix : Invalid `package.json` (trailing comma in `bugs`).

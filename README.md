@@ -39,16 +39,30 @@ VSCode-SFTP enables you to add, edit or delete files within a local directory an
 - [FAQ](#FAQ)
 
 ## Installation
-This fork is not on the VS Code Marketplace. Install it from a VSIX file:
+This fork is not on the VS Code Marketplace. Install it from a VSIX file: download the latest `sftp-<version>.vsix` from the [releases page](https://github.com/tungpun/vscode-sftp/releases/), then use either method below.
 
-1. Download the latest `sftp-<version>.vsix` from the [releases page](https://github.com/tungpun/vscode-sftp/releases/).
-2. Select Extensions (Ctrl + Shift + X).
-3. Uninstall any other SFTP extension (`Natizyskunk.sftp` or `liximomo.sftp`). They register the same commands and conflict with this one.
-4. Open the "More Actions" menu (ellipsis at the top) and click "Install from VSIX…", or run `code --install-extension sftp-<version>.vsix`.
+Uninstall any other SFTP extension first (`Natizyskunk.sftp` or `liximomo.sftp`). They register the same commands and conflict with this one.
+
+### Method 1 (VS Code UI)
+1. Select Extensions (Ctrl + Shift + X).
+2. Uninstall any other SFTP extension.
+3. Open the "More Actions" menu (ellipsis at the top) and click "Install from VSIX…".
+4. Locate the VSIX file and select it.
 5. Reload VS Code.
-6. Check the extension shows as **SFTP (tungpun fork)** with ID `tungpun.sftp`.
 
-Updates are not automatic. Repeat these steps with a newer VSIX to update.
+### Method 2 (Command line)
+```sh
+code --uninstall-extension Natizyskunk.sftp   # if installed
+code --install-extension sftp-<version>.vsix
+```
+Then reload VS Code (Command Palette → `Developer: Reload Window`).
+
+On macOS, if `code` is not found, run `Shell Command: Install 'code' command in PATH` from the Command Palette first. A `DEP0169` `url.parse()` deprecation warning may be printed. It comes from the `code` CLI itself and can be ignored.
+
+### Check the install
+The extension shows as **SFTP (tungpun fork)** with ID `tungpun.sftp`, or run `code --list-extensions --show-versions | grep sftp`.
+
+Updates are not automatic. Install a newer VSIX the same way to update.
 
 ### Building from source
 ```sh
@@ -114,6 +128,9 @@ You can see the full list of configuration options [here](https://github.com/Nat
 - [sftp sync extension for VS Code (tungpun fork)](#sftp-sync-extension-for-vs-code-tungpun-fork)
   - [About this fork](#about-this-fork)
   - [Installation](#installation)
+    - [Method 1 (VS Code UI)](#method-1-vs-code-ui)
+    - [Method 2 (Command line)](#method-2-command-line)
+    - [Check the install](#check-the-install)
     - [Building from source](#building-from-source)
     - [Releasing](#releasing)
   - [Documentation](#documentation)
