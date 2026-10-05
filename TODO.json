@@ -1,0 +1,49 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "Fix 'TypeError: isDate is not a function' on remote -> local transfer",
+      "description": "ssh2@1.13.0 uses util.isDate, removed in Node 23+ (newer VS Code). Bumped ssh2 to ^1.17.0, which uses util.types.isDate. Verified with an in-process SFTP repro on Node 24.",
+      "progress": "done",
+      "priority": "high",
+      "created_time": "2026-10-05T09:55:00+07:00",
+      "updated_time": "2026-10-05T10:05:00+07:00"
+    },
+    {
+      "id": 2,
+      "title": "Fix invalid package.json and compile errors on develop",
+      "description": "Trailing comma in package.json 'bugs' (upstream 9a6c5d7) broke npm. createCommand.ts used *_TO_ALL_PROFILES constants without importing them. paths.ts passed strings into a Uri-typed getFileSystemPath (would crash on macOS); restored published 1.16.3 toRemotePath.",
+      "progress": "done",
+      "priority": "high",
+      "created_time": "2026-10-05T09:58:00+07:00",
+      "updated_time": "2026-10-05T10:05:00+07:00"
+    },
+    {
+      "id": 4,
+      "title": "Add GitHub workflow to build .vsix and create releases",
+      "description": ".github/workflows/release.yml: builds a platform-neutral .vsix (npm ci --ignore-scripts --omit=optional) on push/PR as an artifact; on v* tags checks the tag matches package.json version and publishes a GitHub release with the .vsix.",
+      "progress": "done",
+      "priority": "medium",
+      "created_time": "2026-10-05T10:15:00+07:00",
+      "updated_time": "2026-10-05T10:20:00+07:00"
+    },
+    {
+      "id": 5,
+      "title": "Rebrand fork: publisher tungpun, bump to 1.16.4, update README",
+      "description": "publisher/author -> tungpun (Natizyskunk kept in contributors), displayName 'SFTP (tungpun fork)', repo/bugs/homepage -> tungpun/vscode-sftp, status bar tooltip 'SFTP@tungpun'. README: fork header, ID comparison table, VSIX install, build and release steps. Extension ID is now tungpun.sftp.",
+      "progress": "done",
+      "priority": "medium",
+      "created_time": "2026-10-05T10:25:00+07:00",
+      "updated_time": "2026-10-05T10:40:00+07:00"
+    },
+    {
+      "id": 3,
+      "title": "Fix broken jest setup",
+      "description": "3 of 4 suites fail with 'Invalid return value' from test/preprocessor.js (preprocessor incompatible with installed jest). Pre-existing, unrelated to the ssh2 fix.",
+      "progress": "backlog",
+      "priority": "low",
+      "created_time": "2026-10-05T10:05:00+07:00",
+      "updated_time": "2026-10-05T10:05:00+07:00"
+    }
+  ]
+}

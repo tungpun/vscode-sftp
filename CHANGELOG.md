@@ -1,3 +1,11 @@
+## 1.16.4 - 2026-10-05
+* Fix : `TypeError: isDate is not a function` on transfers with newer VS Code (Node 23+). Upgrade `ssh2` version to v1.17.0, which no longer uses the removed `util.isDate`.
+* Fix : Invalid `package.json` (trailing comma in `bugs`).
+* Fix : Missing `*_TO_ALL_PROFILES` constants import in `createCommand.ts`.
+* Fix : Restore `toRemotePath` from 1.16.3 (unreleased `getFileSystemPath` change broke the build and could crash downloads of new files on macOS).
+* Add GitHub workflow to package the `.vsix` and publish a GitHub release on `v*` tags.
+* Fork : Publish as `tungpun.sftp` ("SFTP (tungpun fork)") from https://github.com/tungpun/vscode-sftp, so it is distinguishable from upstream `Natizyskunk.sftp`.
+
 ## 1.16.3 - 2023-06-16
 * [#356] New Feature : Upload to all profiles (Pull request [#313](https://github.com/Natizyskunk/vscode-sftp/pull/313) from @wewawa vscode-sftp:create_multi_command).
 * [#357] Fix : Correcting Typo 'avaliable' => 'available' (Pull request [#343](https://github.com/Natizyskunk/vscode-sftp/pull/343) from @kjo-sdds vscode-sftp:develop).
