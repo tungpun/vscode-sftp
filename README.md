@@ -58,13 +58,12 @@ npx @vscode/vsce package
 This produces `sftp-<version>.vsix` in the repo root. The `.vsix` is platform-independent: `ssh2`'s optional native crypto add-ons are skipped and it falls back to its pure-JS implementation.
 
 ### Releasing
-The [Release workflow](./.github/workflows/release.yml) builds the `.vsix` on every push and pull request (downloadable from the workflow run). To publish a release:
+The [Release workflow](./.github/workflows/release.yml) builds the `.vsix` on every push to `main` and every pull request (downloadable from the workflow run). To publish a release:
 
 1. Bump `version` in `package.json` (`npm version <x.y.z> --no-git-tag-version`) and add a `CHANGELOG.md` entry.
-2. Commit and push.
-3. Tag and push: `git tag v<x.y.z> && git push origin v<x.y.z>`.
+2. Merge (or push) it to `main`.
 
-The workflow checks the tag matches `package.json` and creates a GitHub release with the `.vsix` attached.
+If `v<x.y.z>` isn't tagged yet, the workflow tags that commit and creates a GitHub release with `sftp-<x.y.z>.vsix` attached. Pushes to `main` without a version bump only build. You can also release by pushing a `v<x.y.z>` tag yourself; the workflow checks it matches `package.json`.
 
 ## Documentation
 - [Home](https://github.com/Natizyskunk/vscode-sftp/wiki)
